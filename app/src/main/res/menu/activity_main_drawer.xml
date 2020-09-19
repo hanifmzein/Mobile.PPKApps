@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_binaan"
+            android:icon="@drawable/ic_binaan"
+            android:title="@string/menu_binaan" />
+        <item
+            android:id="@+id/nav_mahasiswa"
+            android:icon="@drawable/ic_mahasiswa"
+            android:title="@string/menu_mahasiswa" />
+        <item
+            android:id="@+id/nav_pendamping"
+            android:icon="@drawable/ic_pendamping"
+            android:title="@string/menu_pendamping" />
+        <item
+            android:id="@+id/nav_dosen"
+            android:icon="@drawable/ic_dosen"
+            android:title="@string/menu_dosen" />
+
+    </group>
+</menu>

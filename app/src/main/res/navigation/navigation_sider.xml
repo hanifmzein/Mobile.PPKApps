@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_binaan">
+
+    <fragment
+        android:id="@+id/nav_binaan"
+        android:name="com.uinsk.mobileppkapps.ui.binaan.BinaanFragment"
+        android:label="@string/menu_binaan"
+        tools:layout="@layout/fragment_binaan" />
+
+    <fragment
+        android:id="@+id/nav_mahasiswa"
+        android:name="com.uinsk.mobileppkapps.ui.mahasiswa.MahasiswaFragment"
+        android:label="@string/menu_mahasiswa"
+        tools:layout="@layout/fragment_mahasiswa" />
+
+    <fragment
+        android:id="@+id/nav_pendamping"
+        android:name="com.uinsk.mobileppkapps.ui.pendamping.PendampingFragment"
+        android:label="@string/menu_pendamping"
+        tools:layout="@layout/fragment_pendamping" />
+    <fragment
+        android:id="@+id/nav_dosen"
+        android:name="com.uinsk.mobileppkapps.ui.dosen.DosenFragment"
+        android:label="fragment_dosen"
+        tools:layout="@layout/fragment_dosen" />
+</navigation>
