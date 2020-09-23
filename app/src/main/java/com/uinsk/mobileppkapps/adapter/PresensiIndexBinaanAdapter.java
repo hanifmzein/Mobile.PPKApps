@@ -1,6 +1,7 @@
 package com.uinsk.mobileppkapps.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.PendingIntent;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +44,6 @@ public class PresensiIndexBinaanAdapter extends RecyclerView.Adapter<PresensiInd
         if (indexActive != position) holder.tvIndexPresensi.setTypeface(null, Typeface.NORMAL);
         else {
             holder.tvIndexPresensi.setTypeface(null, Typeface.BOLD);
-//            click(holder, position);
         }
 
         holder.tvIndexPresensi.setText(Integer.toString(position+1));

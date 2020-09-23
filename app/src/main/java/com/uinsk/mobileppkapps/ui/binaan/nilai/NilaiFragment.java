@@ -13,12 +13,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.uinsk.mobileppkapps.R;
+import com.uinsk.mobileppkapps.adapter.NilaiBinaanAdapter;
 import com.uinsk.mobileppkapps.adapter.NilaiIndexBinaanAdapter;
 import com.uinsk.mobileppkapps.adapter.PresensiIndexBinaanAdapter;
 import com.uinsk.mobileppkapps.model.Mahasiswa;
@@ -50,8 +52,6 @@ public class NilaiFragment extends Fragment {
 
                 int len = listMahasiswa.get(0).getNilai().length();
 
-                System.out.println("LENGTH : "+len);
-
                 String[] indexNilai = new String[len];
 
                 Iterator x = listMahasiswa.get(0).getNilai().keys();
@@ -63,10 +63,25 @@ public class NilaiFragment extends Fragment {
                 rvIndexNilai.setHasFixedSize(true);
                 rvIndexNilai.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
                 rvIndexNilai.setAdapter(nilaiIndexBinaanAdapter);
+
+
+                RecyclerView rvMahasiswa = root.findViewById(R.id.rv_binaan);
+                NilaiBinaanAdapter nilaiBinaanAdapter;
+                rvMahasiswa.setLayoutManager(new LinearLayoutManager(root.getContext()));
+                nilaiBinaanAdapter = new NilaiBinaanAdapter(listMahasiswa, indexNilai[indexActive]);
+                rvMahasiswa.setAdapter(nilaiBinaanAdapter);
             }
         });
 
         return root;
+    }
+
+    @Override
+    public void onResume() {
+
+
+
+        super.onResume();
     }
 
 }

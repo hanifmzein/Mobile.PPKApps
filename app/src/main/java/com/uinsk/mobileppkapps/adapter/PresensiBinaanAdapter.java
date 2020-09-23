@@ -33,7 +33,7 @@ public class PresensiBinaanAdapter extends RecyclerView.Adapter<PresensiBinaanAd
     int indexPresensi;
     Context context;
 
-    PresensiBinaanAdapter(ArrayList<Mahasiswa> listMahasiswa, int indexPresensi) {
+    public PresensiBinaanAdapter(ArrayList<Mahasiswa> listMahasiswa, int indexPresensi) {
         this.listMahasiswa = listMahasiswa;
         this.indexPresensi = indexPresensi+1;
     }

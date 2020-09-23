@@ -1,6 +1,7 @@
 package com.uinsk.mobileppkapps.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -41,7 +42,7 @@ public class NilaiBinaanAdapter extends RecyclerView.Adapter<NilaiBinaanAdapter.
     Context context;
     BottomSheetDialogFragment bottomSheetNilai;
 
-    NilaiBinaanAdapter(ArrayList<Mahasiswa> listMahasiswa, String indexNilai) {
+    public NilaiBinaanAdapter(ArrayList<Mahasiswa> listMahasiswa, String indexNilai) {
         this.listMahasiswa = listMahasiswa;
         this.indexNilai = indexNilai;
     }
@@ -74,12 +75,12 @@ public class NilaiBinaanAdapter extends RecyclerView.Adapter<NilaiBinaanAdapter.
             @Override
             public void onClick(View view) {
                 bottomSheetNilai = new NilaiSheet();
-
-                Nilai nilai = new Nilai(mahasiswa.getNim(), indexNilai, holder.tvNilai.getText().toString(), mahasiswa);
+                Nilai nilai = new Nilai(mahasiswa.getNim(), indexNilai, holder.tvNilai.getText().toString(), mahasiswa, holder.tvNilai);
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(NILAI, nilai);
                 bottomSheetNilai.setArguments(bundle);
                 bottomSheetNilai.show(((AppCompatActivity)context).getSupportFragmentManager(), "text");
+
             }
         });
 
@@ -104,45 +105,5 @@ public class NilaiBinaanAdapter extends RecyclerView.Adapter<NilaiBinaanAdapter.
             tvNilai = itemView.findViewById(R.id.tv_nilai);
 
         }
-    }
-
-    void updateList(final Mahasiswa mahasiswa, final int position, final NilaiBinaanAdapter.ViewHolder holder, final String presensi){
-
-        final String status = presensi.substring(0,1);
-
-        String url = "mahasiswa/presensi/"+mahasiswa.getNim();
-        System.out.println("URL : "+url);
-
-        RequestParams params = new RequestParams();
-        params.put("_method", "PATCH");
-//        params.put("index", indexPresensi);
-        params.put("status", status);
-        StringEntity entity=null;
-        try {
-            entity = new StringEntity(params.toString());
-            entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/x-www-form-urlencoded; charset=UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
-        PropClient.post(this.context, url, entity, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                try {
-//                    Mahasiswa mhs = new Mahasiswa(new JSONArray(new String(responseBody)).getJSONObject(0));
-
-                    mahasiswa.setPresensi(mahasiswa.getPresensi().put("hari_"+indexNilai, status));
-                    listMahasiswa.set(position, mahasiswa);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
-            }
-        });
     }
 }

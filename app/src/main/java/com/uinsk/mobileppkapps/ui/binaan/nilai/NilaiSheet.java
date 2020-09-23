@@ -20,6 +20,7 @@ import com.uinsk.mobileppkapps.model.Mahasiswa;
 import com.uinsk.mobileppkapps.model.Nilai;
 
 import org.json.JSONException;
+import org.w3c.dom.Text;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ public class NilaiSheet extends BottomSheetDialogFragment {
     EditText edtNilai;
     Button btnNilai;
     Mahasiswa mahasiswa;
+    TextView tvAngka;
 
     @Nullable
     @Override
@@ -53,6 +55,7 @@ public class NilaiSheet extends BottomSheetDialogFragment {
         tvNilai.setText(nilai.getTipe());
         edtNilai.setText(nilai.getNilai());
         mahasiswa = nilai.getMahasiswa();
+        tvAngka = nilai.getTvNilai();
 
         btnNilai.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,9 +85,8 @@ public class NilaiSheet extends BottomSheetDialogFragment {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                         try {
-
-                            System.out.println("NILAI UPDATE");
                             mahasiswa.setPresensi(mahasiswa.getNilai().put(tipe, angka));
+                            tvAngka.setText(angka);
                             dismiss();
 
                         } catch (JSONException e) {

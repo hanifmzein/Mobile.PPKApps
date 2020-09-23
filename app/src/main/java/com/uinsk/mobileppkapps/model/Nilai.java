@@ -2,27 +2,30 @@ package com.uinsk.mobileppkapps.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class Nilai implements Parcelable {
 
+    String nim;
     String tipe;
     String nilai;
-    String nim;
     Mahasiswa mahasiswa;
+    TextView tvNilai;
 
-    public Nilai(String nim, String tipe, String nilai, Mahasiswa mahasiswa) {
+    public Nilai(String nim, String tipe, String nilai, Mahasiswa mahasiswa, TextView tvNilai) {
         this.nim = nim;
         this.tipe = tipe;
         this.nilai = nilai;
         this.mahasiswa = mahasiswa;
+        this.tvNilai = tvNilai;
     }
 
     protected Nilai(Parcel in) {
+        nim = in.readString();
         tipe = in.readString();
         nilai = in.readString();
-        nim = in.readString();
         mahasiswa = in.readParcelable(Mahasiswa.class.getClassLoader());
     }
 
@@ -37,6 +40,14 @@ public class Nilai implements Parcelable {
             return new Nilai[size];
         }
     };
+
+    public String getNim() {
+        return nim;
+    }
+
+    public void setNim(String nim) {
+        this.nim = nim;
+    }
 
     public String getTipe() {
         return tipe;
@@ -54,20 +65,20 @@ public class Nilai implements Parcelable {
         this.nilai = nilai;
     }
 
-    public String getNim() {
-        return nim;
-    }
-
-    public void setNim(String nim) {
-        this.nim = nim;
-    }
-
     public Mahasiswa getMahasiswa() {
         return mahasiswa;
     }
 
     public void setMahasiswa(Mahasiswa mahasiswa) {
         this.mahasiswa = mahasiswa;
+    }
+
+    public TextView getTvNilai() {
+        return tvNilai;
+    }
+
+    public void setTvNilai(TextView tvNilai) {
+        this.tvNilai = tvNilai;
     }
 
     @Override
@@ -77,9 +88,9 @@ public class Nilai implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(nim);
         parcel.writeString(tipe);
         parcel.writeString(nilai);
-        parcel.writeString(nim);
         parcel.writeParcelable(mahasiswa, i);
     }
 }

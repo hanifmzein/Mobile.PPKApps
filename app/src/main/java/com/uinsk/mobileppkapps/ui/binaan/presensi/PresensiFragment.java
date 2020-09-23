@@ -3,6 +3,7 @@ package com.uinsk.mobileppkapps.ui.binaan.presensi;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,8 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 
 import com.uinsk.mobileppkapps.R;
+import com.uinsk.mobileppkapps.adapter.PresensiBinaanAdapter;
 import com.uinsk.mobileppkapps.adapter.PresensiIndexBinaanAdapter;
 import com.uinsk.mobileppkapps.model.Mahasiswa;
 import com.uinsk.mobileppkapps.ui.binaan.BinaanViewModel;
@@ -45,13 +48,21 @@ public class PresensiFragment extends Fragment {
             @Override
             public void onChanged(ArrayList<Mahasiswa> listMahasiswa) {
 
-                int indexActive = 0;
+                final int indexActive = 0;
 
-                PresensiIndexBinaanAdapter presensiIndexBinaanAdapter = new PresensiIndexBinaanAdapter(listMahasiswa, indexActive, root);
+                final PresensiIndexBinaanAdapter presensiIndexBinaanAdapter = new PresensiIndexBinaanAdapter(listMahasiswa, indexActive, root);
 
                 rvIndexPresensi.setHasFixedSize(true);
                 rvIndexPresensi.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
                 rvIndexPresensi.setAdapter(presensiIndexBinaanAdapter);
+
+
+                RecyclerView rvMahasiswa = root.findViewById(R.id.rv_binaan);
+                PresensiBinaanAdapter presensiBinaanAdapter;
+
+                rvMahasiswa.setLayoutManager(new LinearLayoutManager(root.getContext()));
+                presensiBinaanAdapter = new PresensiBinaanAdapter(listMahasiswa, indexActive);
+                rvMahasiswa.setAdapter(presensiBinaanAdapter);
             }
         });
 
