@@ -13,36 +13,19 @@ public class Mahasiswa implements Parcelable {
     String nama;
     String idProdi;
     String idKelompok;
-    JSONArray listPresensi;
+    JSONObject presensi;
+    JSONObject nilai;
 
     public Mahasiswa(JSONObject json) throws JSONException {
 
         nim = json.getString("nim");
         nama = json.getString("nama");
-        idProdi = json.getString("id_prodi");
-        idKelompok = json.getString("id_kelompok");
-        listPresensi = json.getJSONArray("list_presensi");
+        idProdi = json.getString("prodi_id");
+        idKelompok = json.getString("kelompok_id");
+        presensi = json.getJSONObject("presensi");
+        nilai = json.getJSONObject("nilai");
 
     }
-
-    protected Mahasiswa(Parcel in) {
-        nim = in.readString();
-        nama = in.readString();
-        idProdi = in.readString();
-        idKelompok = in.readString();
-    }
-
-    public static final Creator<Mahasiswa> CREATOR = new Creator<Mahasiswa>() {
-        @Override
-        public Mahasiswa createFromParcel(Parcel in) {
-            return new Mahasiswa(in);
-        }
-
-        @Override
-        public Mahasiswa[] newArray(int size) {
-            return new Mahasiswa[size];
-        }
-    };
 
     public String getNim() {
         return nim;
@@ -76,13 +59,40 @@ public class Mahasiswa implements Parcelable {
         this.idKelompok = idKelompok;
     }
 
-    public JSONArray getListPresensi() {
-        return listPresensi;
+    public JSONObject getPresensi() {
+        return presensi;
     }
 
-    public void setListPresensi(JSONArray listPresensi) {
-        this.listPresensi = listPresensi;
+    public void setPresensi(JSONObject presensi) {
+        this.presensi = presensi;
     }
+
+    public JSONObject getNilai() {
+        return nilai;
+    }
+
+    public void setNilai(JSONObject nilai) {
+        this.nilai = nilai;
+    }
+
+    protected Mahasiswa(Parcel in) {
+        nim = in.readString();
+        nama = in.readString();
+        idProdi = in.readString();
+        idKelompok = in.readString();
+    }
+
+    public static final Creator<Mahasiswa> CREATOR = new Creator<Mahasiswa>() {
+        @Override
+        public Mahasiswa createFromParcel(Parcel in) {
+            return new Mahasiswa(in);
+        }
+
+        @Override
+        public Mahasiswa[] newArray(int size) {
+            return new Mahasiswa[size];
+        }
+    };
 
     @Override
     public int describeContents() {

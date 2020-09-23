@@ -1,38 +1,72 @@
 package com.uinsk.mobileppkapps.ui.binaan.nilai;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Context;
+import android.net.http.SslCertificate;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.uinsk.mobileppkapps.R;
+import com.uinsk.mobileppkapps.adapter.NilaiIndexBinaanAdapter;
+import com.uinsk.mobileppkapps.adapter.PresensiIndexBinaanAdapter;
+import com.uinsk.mobileppkapps.model.Mahasiswa;
+import com.uinsk.mobileppkapps.ui.binaan.BinaanViewModel;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class NilaiFragment extends Fragment {
 
-    private NilaiViewModel mViewModel;
-
-    public static NilaiFragment newInstance() {
-        return new NilaiFragment();
-    }
+    private BinaanViewModel binaanViewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_binaan_nilai, container, false);
-    }
+        final View root =  inflater.inflate(R.layout.fragment_binaan_nilai, container, false);
+        final RecyclerView rvIndexNilai = root.findViewById(R.id.rv_index_nilai);
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(NilaiViewModel.class);
-        // TODO: Use the ViewModel
+        String prodi = "semua";
+        String kelompok = "B03";
+
+        binaanViewModel = ViewModelProviders.of(this).get(BinaanViewModel.class);
+        binaanViewModel.setListMahasiswa(prodi, kelompok);
+        binaanViewModel.getMahasiswa().observe(getViewLifecycleOwner(), new Observer<ArrayList<Mahasiswa>>() {
+            @Override
+            public void onChanged(ArrayList<Mahasiswa> listMahasiswa) {
+
+                int indexActive = 0;
+
+                int len = listMahasiswa.get(0).getNilai().length();
+
+                System.out.println("LENGTH : "+len);
+
+                String[] indexNilai = new String[len];
+
+                Iterator x = listMahasiswa.get(0).getNilai().keys();
+
+                for (int i=0; i<len; i++) indexNilai[i] = x.next().toString();
+
+                NilaiIndexBinaanAdapter nilaiIndexBinaanAdapter = new NilaiIndexBinaanAdapter(getActivity(), indexNilai, listMahasiswa, indexActive, root);
+
+                rvIndexNilai.setHasFixedSize(true);
+                rvIndexNilai.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+                rvIndexNilai.setAdapter(nilaiIndexBinaanAdapter);
+            }
+        });
+
+        return root;
     }
 
 }

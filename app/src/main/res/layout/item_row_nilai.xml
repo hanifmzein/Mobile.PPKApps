@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_nama_mahasiswa"
+        android:layout_width="256dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="4dp"
+        android:text="Muhamad Hanif Zein"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_nim_mahasiswa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-thin"
+        android:text="17106050038"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="@+id/tv_nama_mahasiswa"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nama_mahasiswa" />
+
+    <TextView
+        android:id="@+id/tv_id_prodi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TIF"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.672"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_nama_mahasiswa" />
+
+    <TextView
+        android:id="@+id/tv_id_kelompok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-thin"
+        android:text="B03"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="@+id/tv_id_prodi"
+        app:layout_constraintStart_toStartOf="@+id/tv_id_prodi"
+        app:layout_constraintTop_toTopOf="@+id/tv_nim_mahasiswa" />
+
+    <LinearLayout
+        android:id="@+id/underline"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="8dp"
+        android:background="#DCDCDC"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@+id/tv_nim_mahasiswa"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nim_mahasiswa">
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_nilai"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="100"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_id_kelompok"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_id_prodi" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

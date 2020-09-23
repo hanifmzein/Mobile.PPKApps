@@ -1,5 +1,6 @@
 package com.uinsk.mobileppkapps.adapter;
 
+import android.annotation.SuppressLint;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,58 +17,48 @@ import com.uinsk.mobileppkapps.model.Mahasiswa;
 
 import java.util.ArrayList;
 
-public class IndexBinaanAdapter extends RecyclerView.Adapter<IndexBinaanAdapter.ViewHolder> {
+public class PresensiIndexBinaanAdapter extends RecyclerView.Adapter<PresensiIndexBinaanAdapter.ViewHolder> {
 
     ArrayList<Mahasiswa> listMahasiswa;
-    String[] indexs;
     View root;
     int indexActive;
 
-    public IndexBinaanAdapter(ArrayList<Mahasiswa> listMahasiswa, String[] indexs, int indexActive, View root){
+    public PresensiIndexBinaanAdapter(ArrayList<Mahasiswa> listMahasiswa, int indexActive, View root){
         this.listMahasiswa = listMahasiswa;
-        this.indexs = indexs;
         this.root = root;
         this.indexActive = indexActive;
     }
 
-    void updateData(ArrayList<Mahasiswa> listMahasiswa){
-        this.listMahasiswa = listMahasiswa;
-    }
-
     @NonNull
     @Override
-    public IndexBinaanAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PresensiIndexBinaanAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_index_presensi, parent, false);
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull final IndexBinaanAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final PresensiIndexBinaanAdapter.ViewHolder holder, final int position) {
 
         if (indexActive != position) holder.tvIndexPresensi.setTypeface(null, Typeface.NORMAL);
-        else holder.tvIndexPresensi.setTypeface(null, Typeface.BOLD);
+        else {
+            holder.tvIndexPresensi.setTypeface(null, Typeface.BOLD);
+//            click(holder, position);
+        }
 
-        holder.tvIndexPresensi.setText(indexs[position]);
+        holder.tvIndexPresensi.setText(Integer.toString(position+1));
         holder.cvIndexPresensi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RecyclerView rvMahasiswa = root.findViewById(R.id.rv_binaan);
-                BinaanAdapter binaanAdapter;
-
-                holder.tvIndexPresensi.setTypeface(null, Typeface.BOLD);
-                indexActive = position;
-                notifyDataSetChanged();
-
-                rvMahasiswa.setLayoutManager(new LinearLayoutManager(root.getContext()));
-                binaanAdapter = new BinaanAdapter(listMahasiswa, position);
-                rvMahasiswa.setAdapter(binaanAdapter);
+                click(holder, position);
             }
         });
+
     }
 
     @Override
     public int getItemCount() {
-        return indexs.length;
+        return listMahasiswa.get(0).getPresensi().length();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -80,5 +71,18 @@ public class IndexBinaanAdapter extends RecyclerView.Adapter<IndexBinaanAdapter.
             cvIndexPresensi = itemView.findViewById(R.id.cv_index_presensi);
             tvIndexPresensi = itemView.findViewById(R.id.tv_index_presensi);
         }
+    }
+
+    public void click(PresensiIndexBinaanAdapter.ViewHolder holder, int position){
+        RecyclerView rvMahasiswa = root.findViewById(R.id.rv_binaan);
+        PresensiBinaanAdapter presensiBinaanAdapter;
+
+        holder.tvIndexPresensi.setTypeface(null, Typeface.BOLD);
+        indexActive = position;
+        notifyDataSetChanged();
+
+        rvMahasiswa.setLayoutManager(new LinearLayoutManager(root.getContext()));
+        presensiBinaanAdapter = new PresensiBinaanAdapter(listMahasiswa, position);
+        rvMahasiswa.setAdapter(presensiBinaanAdapter);
     }
 }

@@ -16,16 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.uinsk.mobileppkapps.R;
-import com.uinsk.mobileppkapps.adapter.IndexBinaanAdapter;
-import com.uinsk.mobileppkapps.data.BinaanData;
+import com.uinsk.mobileppkapps.adapter.PresensiIndexBinaanAdapter;
 import com.uinsk.mobileppkapps.model.Mahasiswa;
 import com.uinsk.mobileppkapps.ui.binaan.BinaanViewModel;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class PresensiFragment extends Fragment {
 
@@ -39,31 +34,26 @@ public class PresensiFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         final View root = inflater.inflate(R.layout.fragment_binaan_presensi, container, false);
-
-        binaanViewModel = ViewModelProviders.of(this).get(BinaanViewModel.class);
-
         final RecyclerView rvIndexPresensi = root.findViewById(R.id.rv_index_presensi);
 
+        String prodi = "semua";
+        String kelompok = "B03";
+
+        binaanViewModel = ViewModelProviders.of(this).get(BinaanViewModel.class);
+        binaanViewModel.setListMahasiswa(prodi, kelompok);
         binaanViewModel.getMahasiswa().observe(getViewLifecycleOwner(), new Observer<ArrayList<Mahasiswa>>() {
             @Override
             public void onChanged(ArrayList<Mahasiswa> listMahasiswa) {
 
-                int size = listMahasiswa.get(0).getListPresensi().length();
-
-                String[] indexs = new String[size];
                 int indexActive = 0;
 
-                for (int i=0; i<indexs.length; i++) indexs[i] = Integer.toString(i+1);
-
-                IndexBinaanAdapter indexBinaanAdapter = new IndexBinaanAdapter(listMahasiswa, indexs, indexActive, root);
+                PresensiIndexBinaanAdapter presensiIndexBinaanAdapter = new PresensiIndexBinaanAdapter(listMahasiswa, indexActive, root);
 
                 rvIndexPresensi.setHasFixedSize(true);
                 rvIndexPresensi.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-                rvIndexPresensi.setAdapter(indexBinaanAdapter);
+                rvIndexPresensi.setAdapter(presensiIndexBinaanAdapter);
             }
         });
-
-
 
         return root;
     }
