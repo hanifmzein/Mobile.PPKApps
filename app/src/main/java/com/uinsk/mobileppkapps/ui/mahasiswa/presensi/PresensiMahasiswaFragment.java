@@ -31,17 +31,16 @@ public class PresensiMahasiswaFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_mahasiswa_presensi, container, false);
+        final View view = inflater.inflate(R.layout.fragment_mahasiswa_presensi, container, false);
 
-        final RecyclerView rvMahasiswaPresensi = view.findViewById(R.id.rv_mahasiswa_presensi);
 
         MahasiswaViewModel mahasiswaViewModel = ViewModelProviders.of(this).get(MahasiswaViewModel.class);
         mahasiswaViewModel.getMahasiswa().observe(getViewLifecycleOwner(), new Observer<ArrayList<Mahasiswa>>() {
             @Override
             public void onChanged(ArrayList<Mahasiswa> listMahasiswa) {
 
+                RecyclerView rvMahasiswaPresensi = view.findViewById(R.id.rv_mahasiswa_presensi);
                 MahasiswaPresensiAdapter mahasiswaPresensiAdapter = new MahasiswaPresensiAdapter(listMahasiswa);
-
                 rvMahasiswaPresensi.setHasFixedSize(true);
                 rvMahasiswaPresensi.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
                 rvMahasiswaPresensi.setAdapter(mahasiswaPresensiAdapter);

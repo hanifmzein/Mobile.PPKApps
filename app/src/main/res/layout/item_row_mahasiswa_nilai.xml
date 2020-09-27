@@ -61,7 +61,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_presensi"
+        android:id="@+id/rv_nilai"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -69,6 +69,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/tv_id_kelompok"
         app:layout_constraintStart_toEndOf="@+id/tv_id_prodi"
         app:layout_constraintTop_toTopOf="@+id/tv_id_prodi"
-        tools:listitem="@layout/item_list_presensi" />
+        tools:listitem="@layout/item_list_nilai" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

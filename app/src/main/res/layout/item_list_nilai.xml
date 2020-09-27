@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cl_item_list_presensi"
     android:layout_marginRight="8dp"
-    android:layout_width="wrap_content"
+    android:layout_width="40dp"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/img_presensi"
+    <TextView
+        android:id="@+id/tv_nilai"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_id_kelompok"
-        app:layout_constraintStart_toEndOf="@+id/tv_id_kelompok"
-        app:layout_constraintTop_toTopOf="@+id/tv_id_prodi"
-        app:srcCompat="@drawable/ic_presensi_alpa" />
-
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:text="100"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

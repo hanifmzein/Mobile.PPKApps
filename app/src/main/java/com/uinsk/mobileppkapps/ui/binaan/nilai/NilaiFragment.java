@@ -64,11 +64,8 @@ public class NilaiFragment extends Fragment {
                 int indexActive = 0;
 
                 int len = listMahasiswa.get(0).getNilai().length();
-
                 String[] indexNilai = new String[len];
-
                 Iterator x = listMahasiswa.get(0).getNilai().keys();
-
                 for (int i=0; i<len; i++) indexNilai[i] = x.next().toString();
 
                 NilaiIndexBinaanAdapter nilaiIndexBinaanAdapter = new NilaiIndexBinaanAdapter(getActivity(), indexNilai, listMahasiswa, indexActive, root);

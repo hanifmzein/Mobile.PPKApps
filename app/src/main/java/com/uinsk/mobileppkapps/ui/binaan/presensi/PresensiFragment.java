@@ -65,7 +65,6 @@ public class PresensiFragment extends Fragment {
                 final int indexActive = 0;
 
                 final PresensiIndexBinaanAdapter presensiIndexBinaanAdapter = new PresensiIndexBinaanAdapter(listMahasiswa, indexActive, root);
-
                 rvIndexPresensi.setHasFixedSize(true);
                 rvIndexPresensi.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
                 rvIndexPresensi.setAdapter(presensiIndexBinaanAdapter);
