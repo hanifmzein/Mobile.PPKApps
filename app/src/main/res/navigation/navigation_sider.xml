@@ -27,4 +27,10 @@
         android:name="com.uinsk.mobileppkapps.ui.dosen.DosenFragment"
         android:label="fragment_dosen"
         tools:layout="@layout/fragment_dosen" />
+    <activity
+        android:id="@+id/nav_logout"
+        android:name="com.uinsk.mobileppkapps.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
+
 </navigation>

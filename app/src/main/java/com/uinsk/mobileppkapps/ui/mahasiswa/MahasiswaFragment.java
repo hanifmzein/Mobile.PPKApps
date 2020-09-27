@@ -44,6 +44,11 @@ public class MahasiswaFragment extends Fragment {
             }
         });
 
+        Bundle bundle = new Bundle();
+        bundle.putString("tes", "VALUE STRING ARGUMEN");
+
+        setArguments(bundle);
+
         return root;
     }
 }

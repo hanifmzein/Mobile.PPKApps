@@ -4,6 +4,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.http.SslCertificate;
 import android.os.Bundle;
 
@@ -39,8 +40,20 @@ public class NilaiFragment extends Fragment {
         final View root =  inflater.inflate(R.layout.fragment_binaan_nilai, container, false);
         final RecyclerView rvIndexNilai = root.findViewById(R.id.rv_index_nilai);
 
-        String prodi = "semua";
-        String kelompok = "B03";
+        SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("MyPref", 0);
+        String tipe = pref.getString("tipe", null);
+        String binaan = pref.getString("binaan", null);
+
+        String prodi = "";
+        String kelompok = "";
+
+        if (tipe.equals("dosen")){
+            prodi = binaan;
+            kelompok = "semua";
+        } else if (tipe.equals("pendamping")){
+            prodi = "semua";
+            kelompok = binaan;
+        }
 
         binaanViewModel = ViewModelProviders.of(this).get(BinaanViewModel.class);
         binaanViewModel.setListMahasiswa(prodi, kelompok);

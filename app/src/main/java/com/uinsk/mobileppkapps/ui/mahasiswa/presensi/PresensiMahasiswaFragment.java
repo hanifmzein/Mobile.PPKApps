@@ -1,5 +1,6 @@
 package com.uinsk.mobileppkapps.ui.mahasiswa.presensi;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -7,32 +8,48 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.uinsk.mobileppkapps.R;
+import com.uinsk.mobileppkapps.adapter.MahasiswaPresensiAdapter;
+import com.uinsk.mobileppkapps.adapter.PresensiBinaanAdapter;
+import com.uinsk.mobileppkapps.adapter.PresensiIndexBinaanAdapter;
+import com.uinsk.mobileppkapps.model.Mahasiswa;
+import com.uinsk.mobileppkapps.ui.binaan.BinaanViewModel;
+import com.uinsk.mobileppkapps.ui.mahasiswa.MahasiswaViewModel;
+
+import java.util.ArrayList;
 
 public class PresensiMahasiswaFragment extends Fragment {
-
-    private PresensiMahasiswaViewModel mViewModel;
-
-    public static PresensiMahasiswaFragment newInstance() {
-        return new PresensiMahasiswaFragment();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_mahasiswa_presensi, container, false);
-    }
+        View view = inflater.inflate(R.layout.fragment_mahasiswa_presensi, container, false);
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(PresensiMahasiswaViewModel.class);
-        // TODO: Use the ViewModel
+        final RecyclerView rvMahasiswaPresensi = view.findViewById(R.id.rv_mahasiswa_presensi);
+
+        MahasiswaViewModel mahasiswaViewModel = ViewModelProviders.of(this).get(MahasiswaViewModel.class);
+        mahasiswaViewModel.getMahasiswa().observe(getViewLifecycleOwner(), new Observer<ArrayList<Mahasiswa>>() {
+            @Override
+            public void onChanged(ArrayList<Mahasiswa> listMahasiswa) {
+
+
+                MahasiswaPresensiAdapter mahasiswaPresensiAdapter = new MahasiswaPresensiAdapter(listMahasiswa);
+
+                rvMahasiswaPresensi.setHasFixedSize(true);
+                rvMahasiswaPresensi.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+                rvMahasiswaPresensi.setAdapter(mahasiswaPresensiAdapter);
+            }
+        });
+
+        return view;
     }
 
 }

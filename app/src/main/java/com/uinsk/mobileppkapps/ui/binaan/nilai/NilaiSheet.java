@@ -81,7 +81,7 @@ public class NilaiSheet extends BottomSheetDialogFragment {
 
                 System.out.println("updating nilai...");
 
-                PropClient.post(getActivity(), url, entity, new AsyncHttpResponseHandler() {
+                PropClient.post(url, params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                         try {

@@ -19,13 +19,9 @@ import com.uinsk.mobileppkapps.model.Mahasiswa;
 
 import org.json.JSONException;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
-import cz.msebera.android.httpclient.entity.StringEntity;
-import cz.msebera.android.httpclient.message.BasicHeader;
-import cz.msebera.android.httpclient.protocol.HTTP;
 
 public class PresensiBinaanAdapter extends RecyclerView.Adapter<PresensiBinaanAdapter.ViewHolder> {
 
@@ -70,21 +66,21 @@ public class PresensiBinaanAdapter extends RecyclerView.Adapter<PresensiBinaanAd
         holder.imgHadir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateList(mahasiswa, position, holder, "hadir");
+                updateList(mahasiswa, holder, "hadir");
             }
         });
 
         holder.imgIzin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateList(mahasiswa, position, holder, "izin");
+                updateList(mahasiswa, holder, "izin");
             }
         });
 
         holder.imgAlpa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateList(mahasiswa, position, holder, "alpa");
+                updateList(mahasiswa, holder, "alpa");
             }
         });
 
@@ -115,33 +111,22 @@ public class PresensiBinaanAdapter extends RecyclerView.Adapter<PresensiBinaanAd
         }
     }
 
-    void updateList(final Mahasiswa mahasiswa, final int position, final PresensiBinaanAdapter.ViewHolder holder, final String presensi){
+    void updateList(final Mahasiswa mahasiswa, final PresensiBinaanAdapter.ViewHolder holder, final String presensi){
 
         final String status = presensi.substring(0,1);
 
         String url = "mahasiswa/presensi/"+mahasiswa.getNim();
-        System.out.println("URL : "+url);
 
         RequestParams params = new RequestParams();
         params.put("_method", "PATCH");
         params.put("index", indexPresensi);
         params.put("status", status);
-        StringEntity entity=null;
-        try {
-            entity = new StringEntity(params.toString());
-            entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/x-www-form-urlencoded; charset=UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
 
-        PropClient.post(this.context, url, entity, new AsyncHttpResponseHandler() {
+        PropClient.post(url, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 try {
-//                    Mahasiswa mhs = new Mahasiswa(new JSONArray(new String(responseBody)).getJSONObject(0));
-
                     mahasiswa.setPresensi(mahasiswa.getPresensi().put("hari_"+indexPresensi, status));
-//                    listMahasiswa.set(position, mahasiswa);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
