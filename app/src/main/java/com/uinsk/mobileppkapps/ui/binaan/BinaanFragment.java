@@ -26,8 +26,6 @@ public class BinaanFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-//        binaanViewModel = ViewModelProviders.of(this).get(BinaanViewModel.class);
-
         final View root = inflater.inflate(R.layout.fragment_binaan, container, false);
 
         bottomNavigationView = root.findViewById(R.id.nav_bottom);

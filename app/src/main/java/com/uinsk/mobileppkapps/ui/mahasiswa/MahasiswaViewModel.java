@@ -28,19 +28,9 @@ public class MahasiswaViewModel extends ViewModel {
     private MutableLiveData<ArrayList<Mahasiswa>> listMahasiswa = new MutableLiveData<>();
 
     public MahasiswaViewModel() {
-        String url = "mahasiswa/";
-        System.out.println(url);
+        String url = "mahasiswa";
 
-        RequestParams params = new RequestParams();
-        StringEntity entity;
-        try {
-            entity = new StringEntity(params.toString());
-            entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/x-www-form-urlencoded; charset=UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
-        PropClient.get(url, params, new AsyncHttpResponseHandler() {
+        PropClient.get(url, null, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String result = new String(responseBody);

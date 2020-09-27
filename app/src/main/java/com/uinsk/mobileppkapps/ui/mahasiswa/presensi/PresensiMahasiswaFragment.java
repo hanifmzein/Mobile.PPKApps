@@ -40,11 +40,10 @@ public class PresensiMahasiswaFragment extends Fragment {
             @Override
             public void onChanged(ArrayList<Mahasiswa> listMahasiswa) {
 
-
                 MahasiswaPresensiAdapter mahasiswaPresensiAdapter = new MahasiswaPresensiAdapter(listMahasiswa);
 
                 rvMahasiswaPresensi.setHasFixedSize(true);
-                rvMahasiswaPresensi.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+                rvMahasiswaPresensi.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
                 rvMahasiswaPresensi.setAdapter(mahasiswaPresensiAdapter);
             }
         });
