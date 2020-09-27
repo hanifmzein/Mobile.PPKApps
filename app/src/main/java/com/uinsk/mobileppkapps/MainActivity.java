@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -52,11 +53,19 @@ public class MainActivity extends AppCompatActivity {
         String nama = pref.getString("nama", null);
 
         View headerView = navigationView.getHeaderView(0);
+        ImageView imgPhoto = headerView.findViewById(R.id.img_photo);
         TextView tvNama = headerView.findViewById(R.id.tv_nama);
         TextView tvId = headerView.findViewById(R.id.tv_id);
 
         tvNama.setText(nama);
         tvId.setText(user_id);
+        imgPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

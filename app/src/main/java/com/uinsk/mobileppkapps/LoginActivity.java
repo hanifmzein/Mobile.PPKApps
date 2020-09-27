@@ -50,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         editor.remove("user_id");
         editor.remove("nama");
         editor.remove("binaan");
+        editor.apply();
 
         edtUsername = findViewById(R.id.edt_user);
         edtPassword = findViewById(R.id.edt_pass);

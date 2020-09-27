@@ -37,16 +37,6 @@ public class BinaanViewModel extends ViewModel {
         String url = "mahasiswa/"+prodi+"/"+kelompok;
         System.out.println(url);
 
-//        RequestParams params = new RequestParams();
-//        params.put("prodi", prodi);
-//        StringEntity entity=null;
-//        try {
-//            entity = new StringEntity(params.toString());
-//            entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/x-www-form-urlencoded; charset=UTF-8"));
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
-
         PropClient.get(url, new RequestParams(), new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

@@ -9,7 +9,7 @@
 
     <string name="menu_binaan">Binaan</string>
     <string name="menu_mahasiswa">Mahasiswa</string>
-    <string name="menu_pendamping">Pendmaping</string>
-    <string name="menu_dosen">Dosen</string>
+    <string name="menu_pendamping">Mahasiswa Pendamping</string>
+    <string name="menu_dosen">Dosen Supervisor</string>
     <string name="logout">Logout</string>
 </resources>
